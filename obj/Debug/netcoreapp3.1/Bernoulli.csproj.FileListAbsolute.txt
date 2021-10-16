@@ -1,0 +1,13 @@
+C:\Users\ilkka\OneDrive\Tiedostot\Visual Studio 2019\Projektit\Bernoulli\bin\Debug\netcoreapp3.1\Bernoulli.exe
+C:\Users\ilkka\OneDrive\Tiedostot\Visual Studio 2019\Projektit\Bernoulli\bin\Debug\netcoreapp3.1\Bernoulli.deps.json
+C:\Users\ilkka\OneDrive\Tiedostot\Visual Studio 2019\Projektit\Bernoulli\bin\Debug\netcoreapp3.1\Bernoulli.runtimeconfig.json
+C:\Users\ilkka\OneDrive\Tiedostot\Visual Studio 2019\Projektit\Bernoulli\bin\Debug\netcoreapp3.1\Bernoulli.runtimeconfig.dev.json
+C:\Users\ilkka\OneDrive\Tiedostot\Visual Studio 2019\Projektit\Bernoulli\bin\Debug\netcoreapp3.1\Bernoulli.dll
+C:\Users\ilkka\OneDrive\Tiedostot\Visual Studio 2019\Projektit\Bernoulli\bin\Debug\netcoreapp3.1\Bernoulli.pdb
+C:\Users\ilkka\OneDrive\Tiedostot\Visual Studio 2019\Projektit\Bernoulli\obj\Debug\netcoreapp3.1\Bernoulli.csprojAssemblyReference.cache
+C:\Users\ilkka\OneDrive\Tiedostot\Visual Studio 2019\Projektit\Bernoulli\obj\Debug\netcoreapp3.1\Bernoulli.AssemblyInfoInputs.cache
+C:\Users\ilkka\OneDrive\Tiedostot\Visual Studio 2019\Projektit\Bernoulli\obj\Debug\netcoreapp3.1\Bernoulli.AssemblyInfo.cs
+C:\Users\ilkka\OneDrive\Tiedostot\Visual Studio 2019\Projektit\Bernoulli\obj\Debug\netcoreapp3.1\Bernoulli.csproj.CoreCompileInputs.cache
+C:\Users\ilkka\OneDrive\Tiedostot\Visual Studio 2019\Projektit\Bernoulli\obj\Debug\netcoreapp3.1\Bernoulli.dll
+C:\Users\ilkka\OneDrive\Tiedostot\Visual Studio 2019\Projektit\Bernoulli\obj\Debug\netcoreapp3.1\Bernoulli.pdb
+C:\Users\ilkka\OneDrive\Tiedostot\Visual Studio 2019\Projektit\Bernoulli\obj\Debug\netcoreapp3.1\Bernoulli.genruntimeconfig.cache

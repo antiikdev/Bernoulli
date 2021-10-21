@@ -72,6 +72,7 @@ public class Bernoulli
     /// <summary>
     /// Dice game
     /// </summary>
+    // TODO: finnish the NewGame method for the dice game
     public static void NewGame()
     {
         Console.Clear();
@@ -88,6 +89,7 @@ public class Bernoulli
     /// <summary>
     /// Prints example of geometric average
     /// </summary>
+    // TODO: finnish the Example method with "press any key to continue"
     public static void Example()
     {
         // Six sided dice payoffs [1-6]

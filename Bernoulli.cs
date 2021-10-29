@@ -5,7 +5,7 @@ using System.Text;
 using System.Numerics;
 
 
-/// @author Antiikdev
+/// @author Antiikdev https://github.com/antiikdev/Bernoulli
 /// @version 16 Oct 2021; 22 Oct 2021
 /// <summary>
 /// Petersburg Wager Payoff Profile
@@ -116,10 +116,8 @@ public class Bernoulli
     /// </summary>
     public static void StartNewGame()
     {
-        int[] dicePayoff = new int[diceSideNumber];
-        
         // 1) Enter payoffs for the dice (default: six)
-        dicePayoff = UserPayoffInput();
+        int[] dicePayoff = UserPayoffInput();
 
         // 2) Print six payoffs
         Console.Write("Payoff for each six side dice roll: \n");
@@ -146,16 +144,15 @@ public class Bernoulli
         Console.WriteLine();
         Console.WriteLine("Expected value of ending wealth");
         Console.WriteLine("-------------------------------");
-
         double avg = CalculateArithmeticAvg(endingWealth);
         Console.WriteLine("Arithmetic average is {0:#,###,###} $", avg);
-
         // Geometric average
         double geometricAvg = CalculateGeometricAvg(endingWealth);
         Console.WriteLine("Geometric average is {0:#,###,###} $ ", geometricAvg);
         Console.WriteLine();
 
-        // TODO: 7) The limit for the bet would be... calculate and print
+        // TODO: 7) The limit for the "ideal" bet would be... calculate and print
+        //          Inform the user if the bed was good or bad
 
         // 8) Select: new game or exit
         Console.WriteLine();
@@ -218,7 +215,6 @@ public class Bernoulli
         Console.ReadKey();
         return;
     }
-
 
 
     /// <summary>
@@ -290,7 +286,8 @@ public class Bernoulli
         }
 
         // Take exponent (1/6) of the geometric avg results
-        // TODO: if the diceSideNumber changes, this need to be changed.
+        // TODO: if the diceSideNumber (sides in a dice) changes,
+        //      then this need to be changed.
         double exponent = 0.16666666666666666666666666666667;
         double bev = Math.Pow(sum, exponent);
 

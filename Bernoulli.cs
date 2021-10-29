@@ -6,15 +6,18 @@ using System.Numerics;
 
 
 /// @author Antiikdev
-/// @version 16 Oct 2021
+/// @version 16 Oct 2021; 22 Oct 2021
 /// <summary>
 /// Petersburg Wager Payoff Profile
 /// (Spitznagel, M., 2021. Safe Haven;
-/// Bernoulli, D. 1738, 1954. Exposition of a New Theory on the Measurement of Risk)
+/// based on Bernoulli, D. 1738, 1954.
+/// Exposition of a New Theory on the Measurement of Risk)
 /// </summary>
+// TODO: refactor
 public class Bernoulli
 {
-
+    // Number of possible futures, or sides in the dice
+    private static int diceSideNumber = 6;
 
     /// <summary>
     /// Main
@@ -40,15 +43,15 @@ public class Bernoulli
         Console.WriteLine("1) New geometric avg. dice game");
         Console.WriteLine("2) Print example");
         Console.WriteLine("3) Exit");
-        Console.Write("Enter menu number > ");
+        Console.Write("Write option number and press Enter > ");
 
         switch (Console.ReadLine())
         {
             case "1":
-                NewGame();
+                StartNewGame();
                 return true;
             case "2":
-                Example();
+                PrintExample();
                 return true;
             case "3":
                 return false;
@@ -59,39 +62,117 @@ public class Bernoulli
 
 
     /// <summary>
-    /// Collect user input selection
+    /// User input
     /// </summary>
-    /// <returns></returns>
-    private static string UserInput()
+    /// <returns>User's input in string</returns>
+    private static int UserIntegerInput()
     {
-        Console.Write("Enter your selection > ");
-        return Console.ReadLine();
+        Console.Write(" > ");
+        string input = Console.ReadLine();
+        int integer = 0;
+        try
+        {
+            integer = int.Parse(input);
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine($"Unable to parse '{input}'. Enter integer.");
+        }
+        return integer;
     }
 
 
     /// <summary>
-    /// Dice game
+    /// Collect user input selection
     /// </summary>
-    // TODO: finnish the NewGame method for the dice game
-    public static void NewGame()
+    /// <returns></returns>
+    private static int[] UserPayoffInput()
     {
-        Console.Clear();
-        Console.WriteLine("Not yet working. Enter 3 to exit.");
-        while (true)
+        // 1) a) ask number, b) convert from string to int -> table, c) ask next i
+        int[] table = new int[diceSideNumber];
+        int i = 0;
+
+        while (i < diceSideNumber)
         {
-            string input = UserInput();
-            if (input == "3") break;
+            Console.Write("Enter payoff number " + (i+1) + ". > ");
+            string input = Console.ReadLine();
+            try
+            {
+                int payoff = int.Parse(input);
+                table[i] = payoff;
+                i++;
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine($"Unable to parse '{input}'. Enter integer.");
+            }
         }
-        MenuSelect();
+        return table;
+    }
+
+
+    /// <summary>
+    /// Starts a new dice game
+    /// </summary>
+    public static void StartNewGame()
+    {
+        int[] dicePayoff = new int[diceSideNumber];
+        
+        // 1) Enter payoffs for the dice (default: six)
+        dicePayoff = UserPayoffInput();
+
+        // 2) Print six payoffs
+        Console.Write("Payoff for each six side dice roll: \n");
+        PrintDicePayoff(dicePayoff);
+
+        // 3) Enter your wealth
+        Console.Write("Enter your wealth");
+        int wealth = UserIntegerInput();
+
+        // 4) Enter your wager (bet)
+        Console.Write("Enter your wager (bet)");
+        int wager = UserIntegerInput();
+        Console.WriteLine();
+
+        // 5) Print ending wealths for the six dice rolls
+        Console.Write("Ending wealth (payoff) for each six side dice roll: \n");
+        int[] endingWealth = new int[diceSideNumber];
+        endingWealth = CalculateEndingWealth(dicePayoff, wealth, wager);
+        PrintDicePayoff(endingWealth);
+
+        // 6) Expected value of ending wealth
+        //      - Print artihmetic avg.
+        //      - Print geometric avg.
+        Console.WriteLine();
+        Console.WriteLine("Expected value of ending wealth");
+        Console.WriteLine("-------------------------------");
+
+        double avg = CalculateArithmeticAvg(endingWealth);
+        Console.WriteLine("Arithmetic average is {0:#,###,###} $", avg);
+
+        // Geometric average
+        double geometricAvg = CalculateGeometricAvg(endingWealth);
+        Console.WriteLine("Geometric average is {0:#,###,###} $ ", geometricAvg);
+        Console.WriteLine();
+
+        // TODO: 7) The limit for the bet would be... calculate and print
+
+        // 8) Select: new game or exit
+        Console.WriteLine();
+        Console.WriteLine("Press any key to get back to menu...");
+        Console.ReadKey();
+        return;
     }
 
 
     /// <summary>
     /// Prints example of geometric average
     /// </summary>
-    // TODO: finnish the Example method with "press any key to continue"
-    public static void Example()
+    public static void PrintExample()
     {
+        Console.Clear();
+        Console.WriteLine();
+
         // Six sided dice payoffs [1-6]
         int[] dicePayoff = { 1, 2, 6, 22, 200, 1000000 };
         Console.Write("Payoff for each six side dice roll: \n");
@@ -115,18 +196,27 @@ public class Bernoulli
 
         //Ending wealth
         Console.Write("Ending wealth (payoff) for each six side dice roll: \n");
-        int[] endingWealth = new int[6];
+        int[] endingWealth = new int[diceSideNumber];
         endingWealth = CalculateEndingWealth(dicePayoff, wealth, wager);
         PrintDicePayoff(endingWealth);
 
+        Console.WriteLine();
+        Console.WriteLine("Expected value of ending wealth");
+        Console.WriteLine("-------------------------------");
+
         avg = CalculateArithmeticAvg(endingWealth);
-        Console.WriteLine("Arithmetic average (expected value of ending wealth) {0:#,###,###} $ " +
+        Console.WriteLine("Arithmetic average is {0:#,###,###} $ " +
             "(same as previous avg + 100k - 50k).", avg);
 
         // Geometric average
         double geometricAvg = CalculateGeometricAvg(endingWealth);
-        Console.WriteLine("Geometric average (expected value of ending wealth) {0:#,###,###} $ ", geometricAvg);
+        Console.WriteLine("Geometric average is {0:#,###,###} $ ", geometricAvg);
         Console.WriteLine();
+
+        // Press any key to exit
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
+        return;
     }
 
 
@@ -200,6 +290,7 @@ public class Bernoulli
         }
 
         // Take exponent (1/6) of the geometric avg results
+        // TODO: if the diceSideNumber changes, this need to be changed.
         double exponent = 0.16666666666666666666666666666667;
         double bev = Math.Pow(sum, exponent);
 
